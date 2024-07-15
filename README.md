@@ -5,17 +5,17 @@ This is a forecasting project of house price leveraging Machine Learning techniq
 
 The Russian housing market is one of the most dynamic and volatile in the world, influenced by various economic, political, and social factors. Accurately predicting the realty prices in Russia can help investors, home buyers, and policymakers make informed decisions and optimize their outcomes. 
 
-### Exploratory data analysis:
+### 1. Exploratory data analysis:
 - Missing values handling
 - Correlation exploration and heatmap visualization
 - Distribution of column data
 
-### Feature engineering:
-- 
--
--
+### 2. Feature engineering:
+- Drop less meaningful and collinearity columns
+- Generate crossed variables based on domain knowledge
+- Remove outliers and low variance data
 
-### Model building:
--
--
--
+### 3. Model building:
+- Leverage LightGBM, XGBoost and Catboost  
+- Apply GridSearch and cross-validation
+- Ensemble model by weighted average
