@@ -10,6 +10,7 @@ from sklearn.pipeline import Pipeline
 from sklearn import set_config
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
+from sklearn.model_selection import GridSearchCV
 
 from scripts.func import drop_missing, add_more_features, outlier_predictor
 from scripts.pipe import RemoveCollinearColumns, CategoricalTransformer, TimeTransformer
@@ -62,8 +63,24 @@ pipe = Pipeline([
 
 X_train = train_df.drop(columns=['price_doc'])
 y_train = train_df['price_doc']
-pipe.fit(X_train, y_train)
+# pipe.fit(X_train, y_train)
+
+param_grid = {
+    'light_gbm__max_depth': [5, 6, 7],
+    'light_gbm__learning_rate': [0.02, 0.03, 0.05],
+    'light_gbm__n_estimators': [50, 100, 200],
+}
+
+grid_search = GridSearchCV(pipe, param_grid, cv=5, scoring='neg_mean_squared_error', n_jobs=-1)
+
+# # Fit to the data
+grid_search.fit(X_train, y_train)
+
+# # Get the best parameters and model
+best_params = grid_search.best_params_
+best_model = grid_search.best_estimator_
+
 
 test_df = pd.read_csv('input/test.csv', parse_dates=['timestamp'])
-predictions = pipe.predict(test_df)
+predictions = best_model.predict(test_df)
 print(predictions)
