@@ -22,15 +22,15 @@ The Russian housing market is one of the most dynamic and volatile in the world,
 
 ### 4. Run prediction:
 ```
--- create virtual environment
+-- create virtual environment -- 
 python -m venv venv
 
--- activate virtual environment
+-- activate virtual environment --
 source venv/bin/activate
 
--- install dependencies
+-- install dependencies -- 
 pip install -r requirements.txt
 
--- process main file
+-- process main file --
 python main.py
 ```
